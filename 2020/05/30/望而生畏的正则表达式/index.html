@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="常用的元字符 数量词（匹配x出现的次数） x* 0到多次 x+ 1到多次 x? 0或者一次 x{n} n次 x{n,} n次或者n次以上 x{n,m} 至少n次至多m次 x|y 匹配 x 或 y     特殊元字符 \  转义字符 .  匹配任意单个字符，但是行结束符除外：\n \r \u2028 或 \u2029 \d 匹配任意阿拉伯数字。等价于[0-9] \D 匹配任意一个不是阿拉伯数字的字符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="望而生畏的正则表达式">
+<meta property="og:url" content="http://yoursite.com/2020/05/30/%E6%9C%9B%E8%80%8C%E7%94%9F%E7%95%8F%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
+<meta property="og:site_name" content="旅途永无止境">
+<meta property="og:description" content="常用的元字符 数量词（匹配x出现的次数） x* 0到多次 x+ 1到多次 x? 0或者一次 x{n} n次 x{n,} n次或者n次以上 x{n,m} 至少n次至多m次 x|y 匹配 x 或 y     特殊元字符 \  转义字符 .  匹配任意单个字符，但是行结束符除外：\n \r \u2028 或 \u2029 \d 匹配任意阿拉伯数字。等价于[0-9] \D 匹配任意一个不是阿拉伯数字的字符">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-30T12:03:50.000Z">
+<meta property="article:modified_time" content="2020-05-31T07:05:43.023Z">
+<meta property="article:author" content="zhouzhishou">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/30/%E6%9C%9B%E8%80%8C%E7%94%9F%E7%95%8F%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>望而生畏的正则表达式 | 旅途永无止境</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c7e225a43619704220a5371265ab4e48";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">旅途永无止境</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Talk is Cheep</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/30/%E6%9C%9B%E8%80%8C%E7%94%9F%E7%95%8F%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="zhouzhishou">
+      <meta itemprop="description" content="站点建设中">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旅途永无止境">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          望而生畏的正则表达式
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-30 20:03:50" itemprop="dateCreated datePublished" datetime="2020-05-30T20:03:50+08:00">2020-05-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-31 15:05:43" itemprop="dateModified" datetime="2020-05-31T15:05:43+08:00">2020-05-31</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="常用的元字符"><a href="#常用的元字符" class="headerlink" title="常用的元字符"></a>常用的元字符</h2><ul>
+<li>数量词（匹配x出现的次数）<ol>
+<li>x* 0到多次</li>
+<li>x+ 1到多次</li>
+<li>x? 0或者一次</li>
+<li>x{n} n次</li>
+<li>x{n,} n次或者n次以上</li>
+<li>x{n,m} 至少n次至多m次</li>
+<li>x|y 匹配 x 或 y  </li>
+</ol>
+</li>
+<li>特殊元字符<ol>
+<li>\  转义字符</li>
+<li>.  匹配任意单个字符，但是行结束符除外：\n \r \u2028 或 \u2029</li>
+<li>\d 匹配任意阿拉伯数字。等价于[0-9]</li>
+<li>\D 匹配任意一个不是阿拉伯数字的字符。等价于[^0-9]</li>
+<li>\w 匹配任意字母、数字字符、下划线的字符。等价于 [A-Za-z0-9_]</li>
+<li>\W 匹配任意不是字母、数字、下划线的字符。等价于 [^A-Za-z0-9_]</li>
+<li>\s 匹配一个空白符，包括空格、制表符、换页符、换行符和其他 Unicode 空格</li>
+<li>\S 匹配一个非空白符</li>
+<li>\n 匹配一个换行</li>
+</ol>
+</li>
+<li>字符集合<ol>
+<li>[xyz] 字符组。匹配集合中的任意一个字符。可以使用连字符’-‘指定一个范围[a-z]</li>
+<li>[^xyz] 反义字符组,匹配任意不在括号内的字符,可以使用连字符’-‘指定一个范围[^a-z]</li>
+</ol>
+</li>
+<li>边界字符<ol>
+<li>^x 匹配以x开始</li>
+<li>x$ 匹配以x结尾</li>
+<li>\b 匹配一个零宽单词边界,如一个字母与一个空格之间</li>
+<li>\B 匹配一个零宽非单词边界，如两个字母之间或两个空格之间</li>
+</ol>
+</li>
+<li>分组<ol>
+<li>(x) 匹配 x 并且捕获匹配项</li>
+<li>(?:x) 匹配 x 不会捕获匹配项</li>
+</ol>
+</li>
+<li>断言<ol>
+<li>x(?=y) 仅匹配被y跟随的x</li>
+<li>x(?!y 仅匹配不被y跟随的x   </li>
+</ol>
+</li>
+</ul>
+<h2 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h2><ul>
+<li>i ignoreCase 忽略大小写匹配</li>
+<li>m multiline 多行匹配</li>
+<li>g global 全局匹配        </li>
+</ul>
+<h2 id="正则的捕获"><a href="#正则的捕获" class="headerlink" title="正则的捕获"></a>正则的捕获</h2><ul>
+<li>exec</li>
+<li>test</li>
+<li>match</li>
+<li>replace</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 假设变量是字母</span><br><span class="line">let str &#x3D; &quot;你的名字&#123;&#123;name&#125;&#125;,年龄&#123;&#123;age&#125;&#125;&quot;,</span><br><span class="line">    reg &#x3D; &#x2F;[a-zA-Z]+&#x2F;g</span><br><span class="line">    reg.exec(str) &#x2F;&#x2F; [ &#39;name&#39;, index: 6, input: &#39;你的名字&#123;&#123;name&#125;&#125;,年龄&#123;&#123;age&#125;&#125;&#39;, groups: undefined ] 只匹配一次</span><br><span class="line">    str.match(reg) &#x2F;&#x2F; [ &#39;name&#39;, &#39;age&#39; ]</span><br><span class="line">    reg.test(str) true</span><br><span class="line">    str.replace(reg,function (...[$1]) &#123;</span><br><span class="line">        console.log(args); &#x2F;&#x2F; name age</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="正则的分组和引用"><a href="#正则的分组和引用" class="headerlink" title="正则的分组和引用"></a>正则的分组和引用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">问题1：把字符串切成连续相同字符的正则怎么写，比如abbcccdddd切成a,bb,ccc,dddd</span><br><span class="line"></span><br><span class="line">let str &#x3D; &quot;abbcccdddd&quot;,</span><br><span class="line">    reg &#x3D; &#x2F;(\w)\1*&#x2F;g; &#x2F;&#x2F; \1表示第一个()匹配的值</span><br><span class="line">    str.match(reg); &#x2F;&#x2F; [&quot;a&quot;, &quot;bb&quot;, &quot;cc&quot;, &quot;ddd&quot;]</span><br><span class="line"></span><br><span class="line">问题2: 用obj&#x3D;&#123;name:&quot;Tom&quot;,age: 23&#125;里的变量替换模版 my name is &#123;&#123;name&#125;&#125;, my age is &#123;&#123;age&#125;&#125; </span><br><span class="line"></span><br><span class="line">let tmpl &#x3D; &quot;my name is &#123;&#123;name&#125;&#125;, my age is &#123;&#123;age&#125;&#125;&quot;,</span><br><span class="line">    data &#x3D; &#123; name: &quot;Tom&quot;, age: 23 &#125;;</span><br><span class="line">function template(tmpl, data)&#123;</span><br><span class="line">    let reg &#x3D; &#x2F;\&#123;\&#123;([a-zA-Z_$]+)\&#125;\&#125;&#x2F;g;</span><br><span class="line">    return tmpl &#x3D; tmpl.replace(reg, function(_,...[$1]) &#123;</span><br><span class="line">        return data[$1];</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line">template(tmpl,data) &#x2F;&#x2F;my name is Tom, my age is 23</span><br><span class="line"></span><br><span class="line">问题3 解析https:&#x2F;&#x2F;baidu.com?name&#x3D;&quot;Tom&quot;&amp;age&#x3D;23#video参数</span><br><span class="line"></span><br><span class="line">let url &#x3D; &#39;https:&#x2F;&#x2F;baidu.com?name&#x3D;&quot;Tom&quot;&amp;age&#x3D;23#video&#39;   </span><br><span class="line">function queryUrlParams(url) &#123;</span><br><span class="line">    let params &#x3D; &#123;&#125;,</span><br><span class="line">        hashReg &#x3D; &#x2F;#([^?&#x3D;&amp;#]+)&#x2F;g</span><br><span class="line">    url.replace(&#x2F;([^?&#x3D;&amp;#]+)&#x3D;([^?&#x3D;&amp;#]+)&#x2F;g, function (_,...[$1,$2]) &#123;</span><br><span class="line">        params[$1] &#x3D; $2</span><br><span class="line">    &#125;)</span><br><span class="line">    if (hashReg.test(url)) &#123;</span><br><span class="line">        url.replace(hashReg, function (_,...[$1]) &#123;</span><br><span class="line">            params[&quot;hash&quot;] &#x3D; $1</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    return params;</span><br><span class="line">&#125;</span><br><span class="line">queryUrlParams(url) &#x2F;&#x2F; &#123; name: &#39;&quot;Tom&quot;&#39;, age: &#39;23&#39;, hash: &#39;video&#39; &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="正则捕获的贪婪性"><a href="#正则捕获的贪婪性" class="headerlink" title="正则捕获的贪婪性"></a>正则捕获的贪婪性</h2><ul>
+<li><p>默认情况下，正则捕获的时候，匹配字符尽可能多的匹配，这种行为被称之为”贪婪”匹配。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let str &#x3D; &quot;今年是2020年&quot;,</span><br><span class="line">    reg &#x3D; &#x2F;\d+&#x2F;g </span><br><span class="line">str.match(reg) &#x2F;&#x2F; [&quot;2020&quot;]</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ul>
+<li><p>当我们使用正则表达式进行非贪婪匹配只需在带匹配的字符后跟随一个❓即可。</p>
+<pre><code>let str = &quot;今年是2020年&quot;,
+    reg = /\d+?/g 
+str.match(reg) // [&apos;2&apos;, &apos;0&apos;, &apos;2&apos;, &apos;0&apos;]  
+</code></pre></li>
+</ul>
+<h2 id="？常见的几种用法"><a href="#？常见的几种用法" class="headerlink" title="？常见的几种用法"></a>？常见的几种用法</h2><ul>
+<li>x? 匹配0或者一次</li>
+<li>?? +? *? {1,5}? 取消捕获时的贪婪性</li>
+<li>(?:) 只匹配不捕获</li>
+<li>(?=) 正向预查</li>
+<li>(?!) 反向预查</li>
+<li>(?&lt;=y)x x只有在y后面才匹配</li>
+<li>(?&lt;!y)x x只有不在y后面才匹配</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/28/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90/" rel="prev" title="数据类型的全面解析">
+      <i class="fa fa-chevron-left"></i> 数据类型的全面解析
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E-%E6%8E%92%E5%BA%8F/" rel="next" title="数据结构与算法之美-排序">
+      数据结构与算法之美-排序 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的元字符"><span class="nav-number">1.</span> <span class="nav-text">常用的元字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修饰符"><span class="nav-number">2.</span> <span class="nav-text">修饰符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则的捕获"><span class="nav-number">3.</span> <span class="nav-text">正则的捕获</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则的分组和引用"><span class="nav-number">4.</span> <span class="nav-text">正则的分组和引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则捕获的贪婪性"><span class="nav-number">5.</span> <span class="nav-text">正则捕获的贪婪性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#？常见的几种用法"><span class="nav-number">6.</span> <span class="nav-text">？常见的几种用法</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zhouzhishou"
+      src="/images/header.jpg">
+  <p class="site-author-name" itemprop="name">zhouzhishou</p>
+  <div class="site-description" itemprop="description">站点建设中</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhouzhishou123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhouzhishou123" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/zhouzhishou_123@163.com" title="E-Mail → zhouzhishou_123@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouzhishou</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

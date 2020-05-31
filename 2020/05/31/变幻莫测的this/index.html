@@ -20,30 +20,32 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="站点建设中">
-<meta property="og:type" content="website">
-<meta property="og:title" content="旅途永无止境">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="为什么要用this this关键字是javascript中最复杂的机制之一,对于有经验的javascript开发者来说都是一种非常复杂的机制，那么我们为什么要用this以及在哪种场景会用到this?下面可以通过一个例子说明。  12345678910111213141516171819202122232425262728293031&#x2F;&#x2F;使用this的情况let Tom &amp;#x3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="变幻莫测的this">
+<meta property="og:url" content="http://yoursite.com/2020/05/31/%E5%8F%98%E5%B9%BB%E8%8E%AB%E6%B5%8B%E7%9A%84this/index.html">
 <meta property="og:site_name" content="旅途永无止境">
-<meta property="og:description" content="站点建设中">
+<meta property="og:description" content="为什么要用this this关键字是javascript中最复杂的机制之一,对于有经验的javascript开发者来说都是一种非常复杂的机制，那么我们为什么要用this以及在哪种场景会用到this?下面可以通过一个例子说明。  12345678910111213141516171819202122232425262728293031&#x2F;&#x2F;使用this的情况let Tom &amp;#x3">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-31T07:11:07.000Z">
+<meta property="article:modified_time" content="2020-05-31T11:02:21.614Z">
 <meta property="article:author" content="zhouzhishou">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/2020/05/31/%E5%8F%98%E5%B9%BB%E8%8E%AB%E6%B5%8B%E7%9A%84this/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>旅途永无止境</title>
+  <title>变幻莫测的this | 旅途永无止境</title>
   
 
 
@@ -161,123 +163,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/31/%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E7%9A%84%E7%90%86%E8%A7%A3%E9%97%AD%E5%8C%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="zhouzhishou">
-      <meta itemprop="description" content="站点建设中">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="旅途永无止境">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/31/%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E7%9A%84%E7%90%86%E8%A7%A3%E9%97%AD%E5%8C%85/" class="post-title-link" itemprop="url">如何正确的理解闭包</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-31 18:02:47" itemprop="dateCreated datePublished" datetime="2020-05-31T18:02:47+08:00">2020-05-31</time>
-            </span>
-
-          
-
-        </div>
-      </header>
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/31/javascript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="zhouzhishou">
-      <meta itemprop="description" content="站点建设中">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="旅途永无止境">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/31/javascript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">javascript设计模式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-31 18:01:34" itemprop="dateCreated datePublished" datetime="2020-05-31T18:01:34+08:00">2020-05-31</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -293,10 +182,9 @@
       <meta itemprop="name" content="旅途永无止境">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/31/%E5%8F%98%E5%B9%BB%E8%8E%AB%E6%B5%8B%E7%9A%84this/" class="post-title-link" itemprop="url">变幻莫测的this</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          变幻莫测的this
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -320,7 +208,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="为什么要用this"><a href="#为什么要用this" class="headerlink" title="为什么要用this"></a>为什么要用this</h2><blockquote>
+        <h2 id="为什么要用this"><a href="#为什么要用this" class="headerlink" title="为什么要用this"></a>为什么要用this</h2><blockquote>
 <p>this关键字是javascript中最复杂的机制之一,对于有经验的javascript开发者来说都是一种非常复杂的机制，那么我们为什么要用this以及在哪种场景会用到this?下面可以通过一个例子说明。</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;使用this的情况</span><br><span class="line"></span><br><span class="line">let Tom &#x3D; &#123; name: &quot;Tom&quot; &#125;,</span><br><span class="line">    Jerry &#x3D; &#123; name: &quot;Jerry&quot; &#125;;</span><br><span class="line"></span><br><span class="line">function identify() &#123;</span><br><span class="line">    return this.name.toUpperCase();</span><br><span class="line">&#125;</span><br><span class="line">function speak() &#123;</span><br><span class="line">    let greeting &#x3D; &quot;Hello, I am &quot; + identify.call(this);</span><br><span class="line">        console.log(greeting);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(identify.call(Tom)); &#x2F;&#x2F; TOM</span><br><span class="line">console.log(identify.call(Jerry)); &#x2F;&#x2F; JERRY</span><br><span class="line">speak.call(Tom); &#x2F;&#x2F; Hello, I am TOM</span><br><span class="line">speak.call(Jerry); &#x2F;&#x2F; Hello, I am JERRY</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;不使用this的情况</span><br><span class="line"></span><br><span class="line">function identify(context) &#123;</span><br><span class="line">    return context.name.toUpperCase();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function speak(context) &#123;</span><br><span class="line">    let greeting &#x3D; &quot;Hello, I am &quot; + identify(context);</span><br><span class="line">    console.log(greeting);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">identify(Tom); &#x2F;&#x2F; TOM</span><br><span class="line">speak(Jerry) &#x2F;&#x2F; Hello, I am JERRY</span><br></pre></td></tr></table></figure>
@@ -388,421 +276,33 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">document.getElementById(&#39;btn&#39;).onclick &#x3D; function (e) &#123;</span><br><span class="line">            console.log(this);</span><br><span class="line">        &#125; &#x2F;&#x2F; this指向当前元素本身</span><br><span class="line">document.getElementById(&#39;btn&#39;).addEventListener(&quot;click&quot;,function () &#123;</span><br><span class="line">            console.log(this);</span><br><span class="line">        &#125;) &#x2F;&#x2F; this指向当前元素本身</span><br></pre></td></tr></table></figure>
 
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/31/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E6%95%91%E4%B8%96%E4%B8%BB-promise/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="zhouzhishou">
-      <meta itemprop="description" content="站点建设中">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="旅途永无止境">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/31/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E6%95%91%E4%B8%96%E4%B8%BB-promise/" class="post-title-link" itemprop="url">异步编程救世主-promise</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-31 14:37:23" itemprop="dateCreated datePublished" datetime="2020-05-31T14:37:23+08:00">2020-05-31</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/31/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E6%95%91%E4%B8%96%E4%B8%BB-promise/" rel="prev" title="异步编程救世主-promise">
+      <i class="fa fa-chevron-left"></i> 异步编程救世主-promise
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/31/javascript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="next" title="javascript设计模式">
+      javascript设计模式 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E-%E6%8E%92%E5%BA%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="zhouzhishou">
-      <meta itemprop="description" content="站点建设中">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="旅途永无止境">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E-%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">数据结构与算法之美-排序</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-30 20:37:24" itemprop="dateCreated datePublished" datetime="2020-05-30T20:37:24+08:00">2020-05-30</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/30/%E6%9C%9B%E8%80%8C%E7%94%9F%E7%95%8F%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="zhouzhishou">
-      <meta itemprop="description" content="站点建设中">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="旅途永无止境">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/30/%E6%9C%9B%E8%80%8C%E7%94%9F%E7%95%8F%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-title-link" itemprop="url">望而生畏的正则表达式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-30 20:03:50" itemprop="dateCreated datePublished" datetime="2020-05-30T20:03:50+08:00">2020-05-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-31 15:05:43" itemprop="dateModified" datetime="2020-05-31T15:05:43+08:00">2020-05-31</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="常用的元字符"><a href="#常用的元字符" class="headerlink" title="常用的元字符"></a>常用的元字符</h2><ul>
-<li>数量词（匹配x出现的次数）<ol>
-<li>x* 0到多次</li>
-<li>x+ 1到多次</li>
-<li>x? 0或者一次</li>
-<li>x{n} n次</li>
-<li>x{n,} n次或者n次以上</li>
-<li>x{n,m} 至少n次至多m次</li>
-<li>x|y 匹配 x 或 y  </li>
-</ol>
-</li>
-<li>特殊元字符<ol>
-<li>\  转义字符</li>
-<li>.  匹配任意单个字符，但是行结束符除外：\n \r \u2028 或 \u2029</li>
-<li>\d 匹配任意阿拉伯数字。等价于[0-9]</li>
-<li>\D 匹配任意一个不是阿拉伯数字的字符。等价于[^0-9]</li>
-<li>\w 匹配任意字母、数字字符、下划线的字符。等价于 [A-Za-z0-9_]</li>
-<li>\W 匹配任意不是字母、数字、下划线的字符。等价于 [^A-Za-z0-9_]</li>
-<li>\s 匹配一个空白符，包括空格、制表符、换页符、换行符和其他 Unicode 空格</li>
-<li>\S 匹配一个非空白符</li>
-<li>\n 匹配一个换行</li>
-</ol>
-</li>
-<li>字符集合<ol>
-<li>[xyz] 字符组。匹配集合中的任意一个字符。可以使用连字符’-‘指定一个范围[a-z]</li>
-<li>[^xyz] 反义字符组,匹配任意不在括号内的字符,可以使用连字符’-‘指定一个范围[^a-z]</li>
-</ol>
-</li>
-<li>边界字符<ol>
-<li>^x 匹配以x开始</li>
-<li>x$ 匹配以x结尾</li>
-<li>\b 匹配一个零宽单词边界,如一个字母与一个空格之间</li>
-<li>\B 匹配一个零宽非单词边界，如两个字母之间或两个空格之间</li>
-</ol>
-</li>
-<li>分组<ol>
-<li>(x) 匹配 x 并且捕获匹配项</li>
-<li>(?:x) 匹配 x 不会捕获匹配项</li>
-</ol>
-</li>
-<li>断言<ol>
-<li>x(?=y) 仅匹配被y跟随的x</li>
-<li>x(?!y 仅匹配不被y跟随的x   </li>
-</ol>
-</li>
-</ul>
-<h2 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h2><ul>
-<li>i ignoreCase 忽略大小写匹配</li>
-<li>m multiline 多行匹配</li>
-<li>g global 全局匹配        </li>
-</ul>
-<h2 id="正则的捕获"><a href="#正则的捕获" class="headerlink" title="正则的捕获"></a>正则的捕获</h2><ul>
-<li>exec</li>
-<li>test</li>
-<li>match</li>
-<li>replace</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 假设变量是字母</span><br><span class="line">let str &#x3D; &quot;你的名字&#123;&#123;name&#125;&#125;,年龄&#123;&#123;age&#125;&#125;&quot;,</span><br><span class="line">    reg &#x3D; &#x2F;[a-zA-Z]+&#x2F;g</span><br><span class="line">    reg.exec(str) &#x2F;&#x2F; [ &#39;name&#39;, index: 6, input: &#39;你的名字&#123;&#123;name&#125;&#125;,年龄&#123;&#123;age&#125;&#125;&#39;, groups: undefined ] 只匹配一次</span><br><span class="line">    str.match(reg) &#x2F;&#x2F; [ &#39;name&#39;, &#39;age&#39; ]</span><br><span class="line">    reg.test(str) true</span><br><span class="line">    str.replace(reg,function (...[$1]) &#123;</span><br><span class="line">        console.log(args); &#x2F;&#x2F; name age</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="正则的分组和引用"><a href="#正则的分组和引用" class="headerlink" title="正则的分组和引用"></a>正则的分组和引用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">问题1：把字符串切成连续相同字符的正则怎么写，比如abbcccdddd切成a,bb,ccc,dddd</span><br><span class="line"></span><br><span class="line">let str &#x3D; &quot;abbcccdddd&quot;,</span><br><span class="line">    reg &#x3D; &#x2F;(\w)\1*&#x2F;g; &#x2F;&#x2F; \1表示第一个()匹配的值</span><br><span class="line">    str.match(reg); &#x2F;&#x2F; [&quot;a&quot;, &quot;bb&quot;, &quot;cc&quot;, &quot;ddd&quot;]</span><br><span class="line"></span><br><span class="line">问题2: 用obj&#x3D;&#123;name:&quot;Tom&quot;,age: 23&#125;里的变量替换模版 my name is &#123;&#123;name&#125;&#125;, my age is &#123;&#123;age&#125;&#125; </span><br><span class="line"></span><br><span class="line">let tmpl &#x3D; &quot;my name is &#123;&#123;name&#125;&#125;, my age is &#123;&#123;age&#125;&#125;&quot;,</span><br><span class="line">    data &#x3D; &#123; name: &quot;Tom&quot;, age: 23 &#125;;</span><br><span class="line">function template(tmpl, data)&#123;</span><br><span class="line">    let reg &#x3D; &#x2F;\&#123;\&#123;([a-zA-Z_$]+)\&#125;\&#125;&#x2F;g;</span><br><span class="line">    return tmpl &#x3D; tmpl.replace(reg, function(_,...[$1]) &#123;</span><br><span class="line">        return data[$1];</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line">template(tmpl,data) &#x2F;&#x2F;my name is Tom, my age is 23</span><br><span class="line"></span><br><span class="line">问题3 解析https:&#x2F;&#x2F;baidu.com?name&#x3D;&quot;Tom&quot;&amp;age&#x3D;23#video参数</span><br><span class="line"></span><br><span class="line">let url &#x3D; &#39;https:&#x2F;&#x2F;baidu.com?name&#x3D;&quot;Tom&quot;&amp;age&#x3D;23#video&#39;   </span><br><span class="line">function queryUrlParams(url) &#123;</span><br><span class="line">    let params &#x3D; &#123;&#125;,</span><br><span class="line">        hashReg &#x3D; &#x2F;#([^?&#x3D;&amp;#]+)&#x2F;g</span><br><span class="line">    url.replace(&#x2F;([^?&#x3D;&amp;#]+)&#x3D;([^?&#x3D;&amp;#]+)&#x2F;g, function (_,...[$1,$2]) &#123;</span><br><span class="line">        params[$1] &#x3D; $2</span><br><span class="line">    &#125;)</span><br><span class="line">    if (hashReg.test(url)) &#123;</span><br><span class="line">        url.replace(hashReg, function (_,...[$1]) &#123;</span><br><span class="line">            params[&quot;hash&quot;] &#x3D; $1</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    return params;</span><br><span class="line">&#125;</span><br><span class="line">queryUrlParams(url) &#x2F;&#x2F; &#123; name: &#39;&quot;Tom&quot;&#39;, age: &#39;23&#39;, hash: &#39;video&#39; &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="正则捕获的贪婪性"><a href="#正则捕获的贪婪性" class="headerlink" title="正则捕获的贪婪性"></a>正则捕获的贪婪性</h2><ul>
-<li><p>默认情况下，正则捕获的时候，匹配字符尽可能多的匹配，这种行为被称之为”贪婪”匹配。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let str &#x3D; &quot;今年是2020年&quot;,</span><br><span class="line">    reg &#x3D; &#x2F;\d+&#x2F;g </span><br><span class="line">str.match(reg) &#x2F;&#x2F; [&quot;2020&quot;]</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<ul>
-<li><p>当我们使用正则表达式进行非贪婪匹配只需在带匹配的字符后跟随一个❓即可。</p>
-<pre><code>let str = &quot;今年是2020年&quot;,
-    reg = /\d+?/g 
-str.match(reg) // [&apos;2&apos;, &apos;0&apos;, &apos;2&apos;, &apos;0&apos;]  
-</code></pre></li>
-</ul>
-<h2 id="？常见的几种用法"><a href="#？常见的几种用法" class="headerlink" title="？常见的几种用法"></a>？常见的几种用法</h2><ul>
-<li>x? 匹配0或者一次</li>
-<li>?? +? *? {1,5}? 取消捕获时的贪婪性</li>
-<li>(?:) 只匹配不捕获</li>
-<li>(?=) 正向预查</li>
-<li>(?!) 反向预查</li>
-<li>(?&lt;=y)x x只有在y后面才匹配</li>
-<li>(?&lt;!y)x x只有不在y后面才匹配</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/28/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="zhouzhishou">
-      <meta itemprop="description" content="站点建设中">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="旅途永无止境">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/28/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">数据类型的全面解析</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-28 19:19:25" itemprop="dateCreated datePublished" datetime="2020-05-28T19:19:25+08:00">2020-05-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-31 19:03:56" itemprop="dateModified" datetime="2020-05-31T19:03:56+08:00">2020-05-31</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一、数据类型"><a href="#一、数据类型" class="headerlink" title="一、数据类型"></a>一、数据类型</h2><ul>
-<li>基本数据类型<ol>
-<li>string</li>
-<li>number</li>
-<li>bigint</li>
-<li>symbol</li>
-<li>null</li>
-<li>undefined</li>
-<li>boolean</li>
-</ol>
-</li>
-<li>引用数据类型<ul>
-<li>object<ol>
-<li>普通对象</li>
-<li>数组对象</li>
-<li>正则对象</li>
-<li>日期对象</li>
-<li>Math数学函数对象</li>
-<li>function</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="二、数据检测的四种方法"><a href="#二、数据检测的四种方法" class="headerlink" title="二、数据检测的四种方法"></a>二、数据检测的四种方法</h2><ol>
-<li><p>typeof</p>
-</li>
-<li><p>instanceof</p>
-</li>
-<li><p>constructor</p>
-</li>
-<li><p>Object.prototype.toString.call </p>
-<p><code>严格的来说Array.isArray()也可以算作是一种检测数组的方式</code></p>
-</li>
-</ol>
-<h2 id="三、数据类型之间转换的规则"><a href="#三、数据类型之间转换的规则" class="headerlink" title="三、数据类型之间转换的规则"></a>三、数据类型之间转换的规则</h2><ol>
-<li><p>其他数据类型转换成数字</p>
-<ul>
-<li><p>parseInt/parseFloat的转换规则:</p>
-<blockquote>
-<p>处理的值是字符串，从字符串的左侧开始查找有效数字（遇到非有效数字字符则停止查找，如果第一个是非有效数字则为NaN）如果处理的值不是字符串需要先转换成字符串然后以上的规则进行处理。parseFloat能够识别小数点。</p>
-</blockquote>
-</li>
-<li><p>Number的转换规则（隐式转换一般都是基于Number做转换的） </p>
-<blockquote>
-<p>true –&gt; 1<br>false –&gt; 0<br>null –&gt; 0<br>“” –&gt; 0<br>undefined –&gt; NaN<br>字符串类型数据只有都是有效数字才会转换成数字否则结果都是NaN</p>
-</blockquote>
-</li>
-<li><p>对象转换成数字 </p>
-<blockquote>
-<p>先转换成字符串在转换成数字 </p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>其他数据类型转换成布尔值</p>
-<blockquote>
-<p>0 NaN null undefined 空字符串转换成布尔值为false,其他的情况为true </p>
-</blockquote>
-<hr>
-<p>  附上大厂面试题</p>
-<pre><code>1. parseInt(&quot;&quot;) // NaN
-2. Number(&quot;&quot;)  // 0
-3. isNaN(&quot;&quot;) // false
-4. parseInt(null) // NaN
-5. Number(null) // 0
-6. isNaN(null) // false
-7. parseInt(&quot;12px&quot;) // 12 
-8. Number(&quot;12px&quot;) // NaN
-9. isNaN(&quot;12px&quot;) // true
-10. parseFloat(&quot;1.6px&quot;)+parseInt(&quot;1.2px&quot;)+typeof parseInt(null); // &quot;2.6Number&quot; 
-11. isNaN(Number(!!Number(parseInt(&quot;0.8&quot;)))); // false
-12. typeof !parseInt(null) + !isNaN(null); // &quot;booleantrue&quot;</code></pre></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -855,6 +355,7 @@ str.match(reg) // [&apos;2&apos;, &apos;0&apos;, &apos;2&apos;, &apos;0&apos;]
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用this"><span class="nav-number">1.</span> <span class="nav-text">为什么要用this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于this的两个常见误区"><span class="nav-number">2.</span> <span class="nav-text">关于this的两个常见误区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何确定this"><span class="nav-number">3.</span> <span class="nav-text">如何确定this</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
