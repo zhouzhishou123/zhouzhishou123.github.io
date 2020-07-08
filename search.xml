@@ -51,7 +51,7 @@
 <p>使用new来调用构造函数和直接调用普通函数的区别</p>
 <ol>
 <li>创建（构造）一个全新的对象作为实例对象</li>
-<li>将这个新对象的<strong>proto</strong>指向构造函数的prototype对象</li>
+<li>将这个新对象的__proto__指向构造函数的prototype对象</li>
 <li>这个新对象会绑定到函数调用的this</li>
 <li>执行函数中的代码</li>
 <li>如果函数没有返回其他对象，那么函数执行完成后会自动返回这个新对象<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = <span class="keyword">new</span> Foo(<span class="string">"Tom"</span>); <span class="comment">// this就是bar这个实例对象</span></span><br></pre></td></tr></table></figure>
@@ -89,6 +89,11 @@
     <content><![CDATA[]]></content>
   </entry>
   <entry>
+    <title>标签</title>
+    <url>/tags/index.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>关于</title>
     <url>/about/index.html</url>
     <content><![CDATA[<p><img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3121089481,3205121802&amp;fm=26&amp;gp=0.jpg" alt="avatar"></p>
@@ -104,10 +109,5 @@
 <p>邮箱：<a href="mailto:zhouzhishou_123@163.com" target="_blank" rel="noopener">zhouzhishou_123@163.com</a></p>
 </blockquote>
 ]]></content>
-  </entry>
-  <entry>
-    <title>标签</title>
-    <url>/tags/index.html</url>
-    <content><![CDATA[]]></content>
   </entry>
 </search>

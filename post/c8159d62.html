@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="旅途永无止境">
 <meta property="og:description" content="this关键字是javascript中最复杂的机制之一,对于有经验的javascript开发者来说都是一种非常复杂的机制">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-07-07T16:35:18.238Z">
+<meta property="og:updated_time" content="2020-07-08T15:17:02.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="变换莫测的this">
 <meta name="twitter:description" content="this关键字是javascript中最复杂的机制之一,对于有经验的javascript开发者来说都是一种非常复杂的机制">
@@ -491,7 +491,7 @@
 <p>使用new来调用构造函数和直接调用普通函数的区别</p>
 <ol>
 <li>创建（构造）一个全新的对象作为实例对象</li>
-<li>将这个新对象的<strong>proto</strong>指向构造函数的prototype对象</li>
+<li>将这个新对象的__proto__指向构造函数的prototype对象</li>
 <li>这个新对象会绑定到函数调用的this</li>
 <li>执行函数中的代码</li>
 <li>如果函数没有返回其他对象，那么函数执行完成后会自动返回这个新对象<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = <span class="keyword">new</span> Foo(<span class="string">"Tom"</span>); <span class="comment">// this就是bar这个实例对象</span></span><br></pre></td></tr></table></figure>
