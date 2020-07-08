@@ -84,11 +84,6 @@
       </tags>
   </entry>
   <entry>
-    <title>分类</title>
-    <url>/categories/index.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>关于</title>
     <url>/about/index.html</url>
     <content><![CDATA[<p><img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3121089481,3205121802&amp;fm=26&amp;gp=0.jpg" alt="avatar"></p>
@@ -104,6 +99,11 @@
 <p>邮箱：<a href="mailto:zhouzhishou_123@163.com" target="_blank" rel="noopener">zhouzhishou_123@163.com</a></p>
 </blockquote>
 ]]></content>
+  </entry>
+  <entry>
+    <title>分类</title>
+    <url>/categories/index.html</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>标签</title>
