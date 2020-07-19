@@ -1,81 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>变换莫测的this</title>
-    <url>/post/c8159d62.html</url>
-    <content><![CDATA[<h2 id="为什么要用this"><a href="#为什么要用this" class="headerlink" title="为什么要用this"></a>为什么要用this</h2><blockquote>
-<p>我们为什么要用this以及在哪种场景会用到this?下面可以通过一个例子说明。</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//使用this的情况</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> Tom = &#123; <span class="attr">name</span>: <span class="string">"Tom"</span> &#125;,</span><br><span class="line">    Jerry = &#123; <span class="attr">name</span>: <span class="string">"Jerry"</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identify</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name.toUpperCase();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">speak</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> greeting = <span class="string">"Hello, I am "</span> + identify.call(<span class="keyword">this</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(greeting);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(identify.call(Tom)); <span class="comment">// TOM</span></span><br><span class="line"><span class="built_in">console</span>.log(identify.call(Jerry)); <span class="comment">// JERRY</span></span><br><span class="line">speak.call(Tom); <span class="comment">// Hello, I am TOM</span></span><br><span class="line">speak.call(Jerry); <span class="comment">// Hello, I am JERRY</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//不使用this的情况</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identify</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> context.name.toUpperCase();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">speak</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> greeting = <span class="string">"Hello, I am "</span> + identify(context);</span><br><span class="line">    <span class="built_in">console</span>.log(greeting);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">identify(Tom); <span class="comment">// TOM</span></span><br><span class="line">speak(Jerry) <span class="comment">// Hello, I am JERRY</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>通过上面的代码我们不难发现，如果不使用this,就需要给identify()和speak()显式传入一个上下文对象，随着你的使用模式越来越复杂，显式传递上下文会让代码变得越来越混乱，可见this提供了一种更优雅的方式来隐式”传递”一个对象的引用，因此可以将API设计得更加简洁并且易于复用。</p>
-</blockquote>
-<h2 id="关于this的两个常见误区"><a href="#关于this的两个常见误区" class="headerlink" title="关于this的两个常见误区"></a>关于this的两个常见误区</h2><ul>
-<li>指向自身(举个🌰) <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callCount</span><span class="params">()</span> &#123;</span></span><br><span class="line">    this.count++;</span><br><span class="line">&#125;</span><br><span class="line">callCount.count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (let <span class="built_in">i</span>=<span class="number">0</span>;<span class="built_in">i</span>&lt;<span class="number">10</span>;<span class="built_in">i</span>++)&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">i</span>&gt;<span class="number">5</span>)&#123;</span><br><span class="line">        callCount()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<blockquote>
-<p>不难发现callCount()会被调用四次但是callCount.count = 0，原因在于此时的this指向window,那么我们很容易联想到window.count = 4,但是结果是NaN。因为在非严格模式下count会提前声明使用，值为undefined,进行数字运算时得出结果NaN(数据类型的全面解析这篇文章有详细介绍数据之间的转换规则)</p>
-<ul>
-<li>指向他的作用域<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">this</span>.bar()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<blockquote>
-<p>代码执行时，浏览器会创建一个全局的执行上下文(EC(G))，进入执行环境栈(ECS)中执行，执行过程中会进行变量和函数提升，变量对象(VO)存储当前上下文变量和值，形成私有作用域(scope)和作用域链(scope chain)，函数执行时，会形成一个全新的执行上下文,进入执行环境栈(ECS)中执行，活动对象(AO)存储函数内的形参、变量和值，同样会形成私有作用域和作用域链。此时的this并不是foo执行上下文下的作用域而是执行window。</p>
-</blockquote>
-<h2 id="如何确定this"><a href="#如何确定this" class="headerlink" title="如何确定this"></a>如何确定this</h2><ul>
-<li><strong>this是在调用时进行绑定的，并不是在声明时确定的，this的绑定和函数声明的位置没有任何关系，完全取决于函数的调用方式。</strong></li>
-</ul>
-<ol>
-<li>默认绑定<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    a: <span class="number">2</span>,</span><br><span class="line">    foo</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> bar = obj.foo; <span class="comment">// 可以看作是foo的引用放入了全局ECS执行。this指向window</span></span><br><span class="line">foo(); <span class="comment">// 1</span></span><br><span class="line">bar(); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 作为回调函数 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doFoo</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">    fn();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    a: <span class="number">2</span>,</span><br><span class="line">    foo</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> a = <span class="string">"global"</span>;</span><br><span class="line"></span><br><span class="line">doFoo(obj.foo); <span class="comment">// "global" 是一样的跟bar()执行原理</span></span><br><span class="line">setTimeout(obj.foo, <span class="number">100</span>); <span class="comment">// "global" 跟bar()执行原理</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<blockquote>
-<p>在非严格模式下this指向window，严格模式下this会绑定到undefined</p>
-</blockquote>
-<ol start="2">
-<li><p>隐式绑定 </p>
-<figure class="highlight delphi"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj2 = <span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    a: 42,</span></span><br><span class="line"><span class="comment">    foo: foo</span></span><br><span class="line"><span class="comment">&#125;</span>;</span><br><span class="line"><span class="keyword">var</span> obj1 = <span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    a:2,</span></span><br><span class="line"><span class="comment">    obj2</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line">obj2.foo(); <span class="comment">// 42 this指向obj2</span></span><br><span class="line"></span><br><span class="line">obj1.obj2.foo(); <span class="comment">// 42 this指向obj2</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>显式绑定</p>
-<figure class="highlight delphi"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    console.log(this.a);</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">var</span> <span class="title">obj</span> = <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    a: 2</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span></span></span><br><span class="line"><span class="function"><span class="title">foo</span>.<span class="title">call</span><span class="params">(obj)</span> <span class="comment">// 2</span></span></span><br><span class="line"><span class="function"><span class="title">foo</span>.<span class="title">apply</span><span class="params">(obj)</span> <span class="comment">// 2</span></span></span><br><span class="line"><span class="function"><span class="title">foo</span>.<span class="title">bind</span><span class="params">(obj)</span><span class="params">()</span> <span class="comment">// 2</span></span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<blockquote>
-<p>一旦被bind、call、apply绑定后不可能再修改它的this<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    a: <span class="number">2</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.a + num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> foo.apply(obj, <span class="built_in">arguments</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bar(<span class="number">3</span>); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<ol start="4">
-<li><p>构造函数里的this</p>
-<blockquote>
-<p>使用new来调用构造函数和直接调用普通函数的区别</p>
-<ol>
-<li>创建（构造）一个全新的对象作为实例对象</li>
-<li>将这个新对象的__proto__指向构造函数的prototype对象</li>
-<li>这个新对象会绑定到函数调用的this</li>
-<li>执行函数中的代码</li>
-<li>如果函数没有返回其他对象，那么函数执行完成后会自动返回这个新对象<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = <span class="keyword">new</span> Foo(<span class="string">"Tom"</span>); <span class="comment">// this就是bar这个实例对象</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</blockquote>
-</li>
-<li><p>箭头函数中的this</p>
-<blockquote>
-<p>箭头函数和普通函数的区别</p>
-<ol>
-<li>箭头函数没有自己的this,而是定义时上级执行上下文中</li>
-<li>本身没有arguments对象,也没有prototype对象</li>
-<li>不能当作构造函数使用</li>
-<li>箭头函数的this绑定后无法被call、apply、bind、new修改<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    a: <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</span><br><span class="line">    &#125;,<span class="number">100</span>)</span><br><span class="line">&#125;</span><br><span class="line">foo.call(obj) <span class="comment">// 箭头函数this是foo里的this</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</blockquote>
-</li>
-<li><p>事件绑定</p>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'btn'</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">        &#125; <span class="comment">// this指向当前元素本身</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'btn'</span>).addEventListener(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">        &#125;) <span class="comment">// this指向当前元素本身</span></span><br></pre></td></tr></table></figure>
-]]></content>
+    <title><![CDATA[从零搭建自己的React项目]]></title>
+    <url>%2Fpost%2Fcca14a3f.html</url>
+    <content type="text"><![CDATA[知识地图 开始工作之前我们需要了解的知识点，以下链接可能某种原因无法访问，可查看对应的中文文档 webpack React React-Router Redux React-Redux Redux-Saga ant-design 配置webpack遇到的问题 issues1: https://github.com/parcel-bundler/parcel/issues/1195 1234567## solution loader: 'less-loader',options: &#123; lessOptions: &#123; javascriptEnabled: true &#125;&#125; issues2：https://github.com/ant-design/ant-design/issues/3442 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849开启css-modules预编译时将第三方包排除&#123; test: /\.less$/, use: [ isPro ? MiniCssExtractPlugin.loader : "style-loader", &#123; loader: 'css-loader', options: &#123; sourceMap: !isPro &#125; &#125;, 'postcss-loader', &#123; loader: 'less-loader', options: &#123; lessOptions: &#123; javascriptEnabled: true &#125; &#125; &#125; ], exclude: [ /node_modules/ ]&#125;, &#123; test: /\.less$/, use: [ isPro ? MiniCssExtractPlugin.loader : "style-loader", &#123; loader: 'css-loader', options: &#123; sourceMap: !isPro &#125; &#125;, 'postcss-loader', &#123; loader: 'less-loader', options: &#123; lessOptions: &#123; javascriptEnabled: true &#125; &#125; &#125; ], include: [ /node_modules/ ] &#125; 引入redux react-redux redux-saga 入口文件main.js123456789101112131415161718192021222324252627import React from 'react';import ReactDOM from 'react-dom';import &#123; Provider &#125; from 'react-redux';import store from './src/store';import './index.scss';import Counter from './src/App';import &#123; BrowserRouter as Router, Switch, Route, Link&#125; from "react-router-dom";ReactDOM.render( &lt;Provider store=&#123; store &#125;&gt; &lt;Router&gt; &lt;ul&gt; &lt;li&gt; &lt;Link to="/"&gt;计数器&lt;/Link&gt; &lt;/li&gt; &lt;/ul&gt; &lt;Switch&gt; &lt;Route exact path="/" children=&#123;&lt;Counter /&gt;&#125; /&gt; &lt;/Switch&gt; &lt;/Router&gt; &lt;/Provider&gt;, document.getElementById( 'root' )); store.js 123456789import &#123; createStore, applyMiddleware &#125; from 'redux';import rootReducer from "../reducers";import rootSaga from '../sagas/rootSaga';import createSagaMiddleware from 'redux-saga';const sagaMiddleware = createSagaMiddleware();const store = createStore( rootReducer, applyMiddleware( sagaMiddleware ) );sagaMiddleware.run( rootSaga );export default store; reducers/rootReduce.js123456import &#123; combineReducers &#125; from 'redux';import counter from './counter';const rootReducer = combineReducers( &#123; counter&#125; );export default rootReducer; reducers/counter.js 12345678910111213141516const initState = &#123; count: 0, chartName: '初始化的数据'&#125;;export default function counter ( state = initState, action ) &#123; switch ( action.type ) &#123; case "INCREMENT": return &#123; ...state, count: state.count + 1 &#125;; case "DECREMENT": return &#123; ...state, count: state.count - 1 &#125;; case "SAVE": return &#123; ...state, ...action.payload &#125;; default: return state; &#125;&#125; saga.js1234567891011121314151617181920import &#123; all, call, takeEvery, put &#125; from 'redux-saga/effects';import &#123; getLists &#125; from '@/Apis/counter';function* getList ( &#123; payload &#125; ) &#123; const &#123; data: &#123; chartName &#125; &#125; = yield call( getLists, payload ); yield put( &#123; type: 'SAVE', payload: &#123; chartName &#125; &#125; );&#125;function* watchGetList () &#123; yield takeEvery( 'GET_LIST', getList );&#125;function* rootSaga () &#123; yield all( [ watchGetList() ] );&#125;export default rootSaga; apis/counters.js 12345678910import request from '@/utils/request';export function getLists ( query ) &#123; return request( &#123; url: '/v1/bpi/currentprice.json', method: 'get', params: query &#125; );&#125; counter.jsx12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152import React from "react";import &#123; connect &#125; from "react-redux";import &#123; Button, Table, Tag, Space &#125; from "antd";import styles from "./app.scss";class Counter extends React.Component &#123; handleIncrement = () =&gt; &#123; this.props.dispatch( &#123; type: "INCREMENT", payload: 0, &#125; ); &#125;; handleDecrement = () =&gt; &#123; this.props.dispatch( &#123; type: "DECREMENT", payload: 0, &#125; ); &#125;; handleGetList = () =&gt; &#123; this.props.dispatch( &#123; type: "GET_LIST" &#125; ); &#125;; render () &#123; const &#123; counter: &#123; count, chartName &#125;, &#125; = this.props; return ( &lt;div style=&#123;&#123; textAlign: "center", marginTop: "100px" &#125;&#125;&gt; &lt;h1&gt;&#123;chartName&#125;&lt;/h1&gt; &lt;h1 className=&#123;styles.center&#125;&gt;计数器：&#123;count&#125;&lt;/h1&gt; &lt;Button type="primary" onClick=&#123;this.handleIncrement&#125;&gt; + &lt;/Button&gt; &lt;Button type="primary" onClick=&#123;this.handleDecrement&#125;&gt; - &lt;/Button&gt; &lt;Button type="primary" onClick=&#123;this.handleGetList&#125;&gt; 更新视图 &lt;/Button&gt; &lt;/div&gt; ); &#125;&#125;const mapStateToProps = ( state ) =&gt; &#123; return &#123; counter: state.counter, &#125;;&#125;;export default connect( mapStateToProps )( Counter ); demo截图 点击按钮+递增、点击按钮-递减、点击按钮更新视图替换初始化数据。接口地址 https://api.coindesk.com/v1/bpi/currentprice.json]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JS基础笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[变换莫测的this]]></title>
+    <url>%2Fpost%2Fc8159d62.html</url>
+    <content type="text"><![CDATA[为什么要用this 我们为什么要用this以及在哪种场景会用到this?下面可以通过一个例子说明。 12345678910111213141516171819202122232425262728293031//使用this的情况let Tom = &#123; name: "Tom" &#125;, Jerry = &#123; name: "Jerry" &#125;;function identify() &#123; return this.name.toUpperCase();&#125;function speak() &#123; let greeting = "Hello, I am " + identify.call(this); console.log(greeting);&#125;console.log(identify.call(Tom)); // TOMconsole.log(identify.call(Jerry)); // JERRYspeak.call(Tom); // Hello, I am TOMspeak.call(Jerry); // Hello, I am JERRY//不使用this的情况function identify(context) &#123; return context.name.toUpperCase();&#125;function speak(context) &#123; let greeting = "Hello, I am " + identify(context); console.log(greeting);&#125;identify(Tom); // TOMspeak(Jerry) // Hello, I am JERRY 通过上面的代码我们不难发现，如果不使用this,就需要给identify()和speak()显式传入一个上下文对象，随着你的使用模式越来越复杂，显式传递上下文会让代码变得越来越混乱，可见this提供了一种更优雅的方式来隐式”传递”一个对象的引用，因此可以将API设计得更加简洁并且易于复用。 关于this的两个常见误区 指向自身(举个🌰) 123456789function callCount() &#123; this.count++;&#125;callCount.count = 0;for (let i=0;i&lt;10;i++)&#123; if (i&gt;5)&#123; callCount() &#125;&#125; 不难发现callCount()会被调用四次但是callCount.count = 0，原因在于此时的this指向window,那么我们很容易联想到window.count = 4,但是结果是NaN。因为在非严格模式下count会提前声明使用，值为undefined,进行数字运算时得出结果NaN(数据类型的全面解析这篇文章有详细介绍数据之间的转换规则) 指向他的作用域123456789101112var a = 2;function foo() &#123; var a = 1; this.bar()&#125;function bar() &#123; console.log(this.a);&#125;foo(); // 2 代码执行时，浏览器会创建一个全局的执行上下文(EC(G))，进入执行环境栈(ECS)中执行，执行过程中会进行变量和函数提升，变量对象(VO)存储当前上下文变量和值，形成私有作用域(scope)和作用域链(scope chain)，函数执行时，会形成一个全新的执行上下文,进入执行环境栈(ECS)中执行，活动对象(AO)存储函数内的形参、变量和值，同样会形成私有作用域和作用域链。此时的this并不是foo执行上下文下的作用域而是执行window。 如何确定this this是在调用时进行绑定的，并不是在声明时确定的，this的绑定和函数声明的位置没有任何关系，完全取决于函数的调用方式。 默认绑定12345678910111213141516171819202122232425262728293031var a = 1;function foo() &#123; console.log(this.a);&#125;var obj = &#123; a: 2, foo&#125;;var bar = obj.foo; // 可以看作是foo的引用放入了全局ECS执行。this指向windowfoo(); // 1bar(); // 1/* 作为回调函数 */function foo() &#123; console.log(this.a);&#125;function doFoo(fn) &#123; fn();&#125;var obj = &#123; a: 2, foo&#125;;var a = "global";doFoo(obj.foo); // "global" 是一样的跟bar()执行原理setTimeout(obj.foo, 100); // "global" 跟bar()执行原理 在非严格模式下this指向window，严格模式下this会绑定到undefined 隐式绑定 1234567891011var obj2 = &#123; a: 42, foo: foo&#125;;var obj1 = &#123; a:2, obj2&#125;obj2.foo(); // 42 this指向obj2obj1.obj2.foo(); // 42 this指向obj2 显式绑定 12345678910function foo() &#123; console.log(this.a);&#125;var obj = &#123; a: 2&#125;foo.call(obj) // 2foo.apply(obj) // 2foo.bind(obj)() // 2 一旦被bind、call、apply绑定后不可能再修改它的this12345678910111213var obj = &#123; a: 2&#125;;function foo(num) &#123; return this.a + num;&#125;function bar() &#123; return foo.apply(obj, arguments);&#125;bar(3); // 5 构造函数里的this 使用new来调用构造函数和直接调用普通函数的区别 创建（构造）一个全新的对象作为实例对象 将这个新对象的__proto__指向构造函数的prototype对象 这个新对象会绑定到函数调用的this 执行函数中的代码 如果函数没有返回其他对象，那么函数执行完成后会自动返回这个新对象123456function Foo(name) &#123; this.name = name; console.log(this);&#125;var bar = new Foo("Tom"); // this就是bar这个实例对象 箭头函数中的this 箭头函数和普通函数的区别 箭头函数没有自己的this,而是定义时上级执行上下文中 本身没有arguments对象,也没有prototype对象 不能当作构造函数使用 箭头函数的this绑定后无法被call、apply、bind、new修改123456789var obj = &#123; a: 2&#125;function foo() &#123; setTimeout(()=&gt;&#123; console.log(this.a); &#125;,100)&#125;foo.call(obj) // 箭头函数this是foo里的this 事件绑定 123456document.getElementById('btn').onclick = function (e) &#123; console.log(this); &#125; // this指向当前元素本身document.getElementById('btn').addEventListener("click",function () &#123; console.log(this); &#125;) // this指向当前元素本身]]></content>
       <categories>
         <category>javascript</category>
       </categories>
@@ -84,30 +23,18 @@
       </tags>
   </entry>
   <entry>
-    <title>分类</title>
-    <url>/categories/index.html</url>
-    <content><![CDATA[]]></content>
+    <title><![CDATA[分类]]></title>
+    <url>%2Fcategories%2Findex.html</url>
+    <content type="text"></content>
   </entry>
   <entry>
-    <title>关于</title>
-    <url>/about/index.html</url>
-    <content><![CDATA[<p><img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3121089481,3205121802&amp;fm=26&amp;gp=0.jpg" alt="avatar"></p>
-<h2 id="签名"><a href="#签名" class="headerlink" title="签名"></a>签名</h2><blockquote>
-<p>学习是一条令人时而喜极若狂、时而郁郁寡欢的道路。</p>
-</blockquote>
-<h2 id="个人信息"><a href="#个人信息" class="headerlink" title="个人信息"></a>个人信息</h2><blockquote>
-<p>Javascript爱好者，酷爱React，略懂JS、HTML/CSS、NODEJS，欢迎沟通交流。</p>
-</blockquote>
-<h2 id="关于Blog"><a href="#关于Blog" class="headerlink" title="关于Blog"></a>关于Blog</h2><p>本站是使用 Hexo 搭建，镜像托管在 Github 之上，博客主题使用的是非常漂亮、简洁的 Next 主题。</p>
-<p>本站是为了个人交流学习而搭建，本站内容若非注明【转】均来自本人撰写，转载必会注明原文引用地址，若您认为侵犯你的个人知识产权，请联系我(<a href="mailto:zhouzhishou_123@163.com" target="_blank" rel="noopener">zhouzhishou_123@163.com</a>)，我会第一时间和您进行沟通处理。若你喜欢本站内容，欢迎转载，但请注明出处，且勿用于商业用途，谢谢！！！</p>
-<h2 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h2><blockquote>
-<p>邮箱：<a href="mailto:zhouzhishou_123@163.com" target="_blank" rel="noopener">zhouzhishou_123@163.com</a></p>
-</blockquote>
-]]></content>
+    <title><![CDATA[关于]]></title>
+    <url>%2Fabout%2Findex.html</url>
+    <content type="text"><![CDATA[签名 学习是一条令人时而喜极若狂、时而郁郁寡欢的道路。 个人信息 Javascript爱好者，酷爱React，略懂JS、HTML/CSS、NODEJS，欢迎沟通交流。 关于Blog本站是使用 Hexo 搭建，镜像托管在 Github 之上，博客主题使用的是非常漂亮、简洁的 Next 主题。 本站是为了个人交流学习而搭建，本站内容若非注明【转】均来自本人撰写，转载必会注明原文引用地址，若您认为侵犯你的个人知识产权，请联系我(zhouzhishou_123@163.com)，我会第一时间和您进行沟通处理。若你喜欢本站内容，欢迎转载，但请注明出处，且勿用于商业用途，谢谢！！！ 联系方式 邮箱：zhouzhishou_123@163.com]]></content>
   </entry>
   <entry>
-    <title>标签</title>
-    <url>/tags/index.html</url>
-    <content><![CDATA[]]></content>
+    <title><![CDATA[标签]]></title>
+    <url>%2Ftags%2Findex.html</url>
+    <content type="text"></content>
   </entry>
 </search>
