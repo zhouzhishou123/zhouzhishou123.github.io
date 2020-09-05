@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhouzhishou123.github.io/"/>
-  <updated>2020-07-26T15:06:43.224Z</updated>
+  <updated>2020-09-05T13:03:51.109Z</updated>
   <id>https://zhouzhishou123.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>不可或缺的函数柯里化</title>
+    <link href="https://zhouzhishou123.github.io/post/d56cb4fa.html"/>
+    <id>https://zhouzhishou123.github.io/post/d56cb4fa.html</id>
+    <published>2020-09-05T12:09:32.000Z</published>
+    <updated>2020-09-05T13:03:51.109Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="美团点评的一道面试题"><a href="#美团点评的一道面试题" class="headerlink" title="美团点评的一道面试题"></a>美团点评的一道面试题</h2><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">给定如下的函数<span class="keyword">add</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(x,y,z)</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">     return x+y+z;</span></span></span><br><span class="line"><span class="function"><span class="comment"> &#125;</span></span></span><br><span class="line"><span class="function">请你实现一个函数<span class="title">sum</span>使得执行后的结果都是他们所有参数的和。</span></span><br><span class="line"><span class="function"> <span class="title">sum</span><span class="params">(1)</span><span class="params">(2,3)</span></span></span><br><span class="line"><span class="function"> <span class="title">sum</span><span class="params">(1)</span><span class="params">(2)</span><span class="params">(3)</span></span></span><br><span class="line"><span class="function"> <span class="title">sum</span><span class="params">(1,2)</span><span class="params">(3)</span></span></span><br></pre></td></tr></table></figure><blockquote><p>毫无疑问，这道题考察的对象就是今天的主角(函数柯里化)。如果对于柯里化理解比较透彻的同学相信是比较容易的</p></blockquote><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curry</span><span class="params">(fn, arr=[])</span></span>&#123;</span><br><span class="line">    let len = fn.length; <span class="comment">// 保存函数参数的个数</span></span><br><span class="line">    <span class="keyword">const</span> _that = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="params">(<span class="rest_arg">...args</span>)</span> </span>&#123;</span><br><span class="line">       let argsLen = [...arr,...args];</span><br><span class="line">        <span class="keyword">if</span> (argsLen.length &lt; len) &#123; <span class="comment">//参数小于所需的参数个数则继续递归调用curry函数直到参数相等</span></span><br><span class="line">            <span class="keyword">return</span> curry(fn, argsLen)</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> fn.apply(_that,argsLen)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">let sum = curry(add);</span><br><span class="line">sum(<span class="number">1</span>)(<span class="number">2</span>,<span class="number">3</span>) -&gt; <span class="number">6</span></span><br><span class="line">sum(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>) -&gt; <span class="number">6</span></span><br><span class="line">sum(<span class="number">1</span>,<span class="number">2</span>)(<span class="number">3</span>) -&gt; <span class="number">6</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      有些事物在你得到之前是无足轻重的，一旦得到之后就会变得不可或缺了，函数柯里化亦是如此。
+    
+    </summary>
+    
+      <category term="高阶函数" scheme="https://zhouzhishou123.github.io/categories/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
+    
+    
+      <category term="JS基础笔记" scheme="https://zhouzhishou123.github.io/tags/JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>望而生畏的正则表达式</title>
